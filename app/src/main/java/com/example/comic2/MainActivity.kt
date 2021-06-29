@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.comic2.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnComicItemClickListner {
     private lateinit var comicRecyclerview: RecyclerView
     private lateinit var comicArrayList: ArrayList<comic>
     lateinit var imageId : Array<Int>
@@ -65,13 +65,13 @@ class MainActivity : AppCompatActivity() {
         comicRecyclerview.layoutManager = LinearLayoutManager(this)
         comicArrayList = arrayListOf<comic>()
         getUserData()
-        
+
     }
 
-     fun onItemClick(item: comic, position: Int) {
-        val intent = Intent(this,InformFragment::class.java )
+    override fun onItemClick(item: comic, position: Int) {
+        val intent = Intent(this,InformActivity::class.java )
         intent.putExtra("key_name", item.name)
-        intent.putExtra("key_img", item.imgImage)
+        intent.putExtra("key_img", item.imgImage.toString())
         intent.putExtra("key_dis", item.descrip)
         startActivity(intent)
     }
@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             val comics= comic(imageId[i], name[i], descrip[i])
             comicArrayList.add(comics)
         }
-        comicRecyclerview.adapter= MyAdapter(comicArrayList)
+        comicRecyclerview.adapter= MyAdapter(comicArrayList, this)
     }
+
 }

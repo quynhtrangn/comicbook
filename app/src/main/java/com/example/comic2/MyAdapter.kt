@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.comic2.databinding.ActivityMainBinding
 import com.google.android.material.imageview.ShapeableImageView
 
-class MyAdapter(private var comicsList: ArrayList<comic>):
+class MyAdapter(private var comicsList: ArrayList<comic>, var clickListner: OnComicItemClickListner):
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
 
@@ -19,10 +19,11 @@ class MyAdapter(private var comicsList: ArrayList<comic>):
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = comicsList[position]
-        holder.imgImage.setImageResource(currentItem.imgImage)
-        holder.txtName.setText(currentItem.name)
-        holder.txtDescrip.setText((currentItem.descrip))
+//        val currentItem = comicsList[position]
+//        holder.imgImage.setImageResource(currentItem.imgImage)
+//        holder.txtName.setText(currentItem.name)
+//        holder.txtDescrip.setText((currentItem.descrip))
+        holder.initialize(comicsList.get(position), clickListner)
 
     }
 
@@ -35,5 +36,17 @@ class MyAdapter(private var comicsList: ArrayList<comic>):
         val txtName : TextView = itemView.findViewById(R.id.txt_name)
         val txtDescrip : TextView = itemView.findViewById(R.id.txt_descrip)
 
+        fun initialize(item: comic, action: OnComicItemClickListner){
+            txtName.setText(item.name)
+            txtDescrip.setText(item.descrip)
+            imgImage.setImageResource(item.imgImage)
+            itemView.setOnClickListener{
+                action.onItemClick(item,adapterPosition)
+            }
+        }
     }
+}
+
+interface OnComicItemClickListner{
+    fun onItemClick(item: comic, position: Int)
 }
