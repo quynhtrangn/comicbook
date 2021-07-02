@@ -18,19 +18,10 @@ class InformActivity : AppCompatActivity() {
         comicName.text= intent.getStringExtra("key_name" )
         intent.getStringExtra("key_img")?.let { comicImage.setImageResource(it.toInt()) }
 
-//        val actionbar = supportActionBar
-//
-//         showing the back button in action bar
-//        if (actionbar != null) {
-//            actionbar.setDisplayHomeAsUpEnabled(true)
-//        }
+
 
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        onBackPressed()
-//        return true
-//    }
 
 
 }

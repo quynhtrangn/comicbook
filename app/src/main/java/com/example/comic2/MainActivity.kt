@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.comic2.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_inform.view.*
 
 class MainActivity : AppCompatActivity(), OnComicItemClickListner {
     private lateinit var comicRecyclerview: RecyclerView
@@ -50,8 +52,13 @@ class MainActivity : AppCompatActivity(), OnComicItemClickListner {
             "FRANKENSTEIN",
         )
         descrip= arrayOf(
-            "Bỗng dưng tôi có thêm bạn cùng phòng",
-            "Một bệnh viện từng có rất nhiều bệnh nhân tới khám cùng đội ngũ bác sĩ lành nghề, nhưng sau vì một lý do bí ẩn mà nó phải đóng cửa. Cho tới khi có 1 bác sĩ trẻ đầy tham vọng đã quyết định cho mở cửa lại nơi này. Tuy nhiên những hiện tượng kỳ lạ bắt đầu xuất hiện...",
+            """Bỗng dưng tôi có thêm bạn 
+                cùng phòng"""".trimMargin(),
+            """Một bệnh viện từng có rất nhiều bệnh nhân
+               tới khám cùng đội ngũ bác sĩ lành nghề,
+               nhưng sau vì một lý do bí ẩn mà nó phải đóng cửa. 
+               Cho tới khi có 1 bác sĩ trẻ đầy tham vọng đã quyết định cho mở cửa lại nơi này. 
+               Tuy nhiên những hiện tượng kỳ lạ bắt đầu xuất hiện...""",
             "Một du thuyền sang chảnh được phát vé miễn phí cho các khách mời may mắn, đổi lại họ phải đeo trên tay nhãn dán mang kí hiệu nhóm máu của mình. Từng hành khách trên con thuyền đâu biết rằng họ chính là những con mồi béo bở cho lũ nhà giàu đứng sau?!",
             "Nữ sinh Song Soo Ji tình cờ nhặt được một quả trứng bí ẩn trong giờ nghỉ trưa, nhưng cô không ngờ rằng bản thân mình đã bị cuốn vào 1 trò chơi bởi kẻ song trùng của chính bản thân mình! Một trò chơi chết chóc, vòng lặp không lối thoát của ma quỷ. Tiếng chuông reo báo kết thúc tiết học vào 5h chiều cũng là tiếng chuông báo hiệu cho một ai đó sẽ phải chết!!",
             "Thế giới lâm vào đại dịch zombie bí ẩn, nhân loại đã lâm vào bờ vực tuyệt chủng. Giờ đây quân đội cũng chỉ tự lo lấy bản thân mình, con người tìm mọi cách để tồn tại kể cả giết hại lẫn nhau. Và trong tình cảnh đó, anh ta đã xuất hiện - một kẻ mang trong mình mầm bệnh zombie. Anh ta vẫn luôn tự đấu tranh với bản thân để giữ lại nhân tính của mình, để có thể sống sót, và để có thể bảo vệ được những người quan trọng đối với anh ta....",
@@ -61,11 +68,23 @@ class MainActivity : AppCompatActivity(), OnComicItemClickListner {
             "Đây là series về mèo của Tác giả truyện kinh dị Junji Ito",
             "Tuyển tập Volume 16 truyện kinh dị của tác giả Junji Ito"
         )
+
         comicRecyclerview = findViewById(R.id.recycleview)
         comicRecyclerview.layoutManager = LinearLayoutManager(this)
         comicArrayList = arrayListOf<comic>()
         getUserData()
+        val search = binding.searchBar
 
+//        search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                comicRecyclerview.adapter.get
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
     }
 
     override fun onItemClick(item: comic, position: Int) {
